@@ -1,20 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
+let checkGeniallyLoaded = setInterval(() => {
     let elementos = [
         document.querySelector("[name='elemento1']"),
         document.querySelector("[name='elemento2']"),
         document.querySelector("[name='elemento3']")
     ];
     let boton = document.querySelector("[name='botonAvanzar']");
+    
+    if (elementos.every(el => el) && boton) { // Si todos los elementos existen
+        clearInterval(checkGeniallyLoaded);
+        iniciarInteractividad(elementos, boton);
+    }
+}, 500); // Verifica cada 500ms hasta que los elementos existan
+
+function iniciarInteractividad(elementos, boton) {
     let contador = 0;
 
-    if (!boton || elementos.includes(null)) {
-        console.error("No se encontraron los elementos. Revisa los nombres en Genially.");
-        return;
-    }
-
+    // Deshabilitar botón de avanzar al inicio
     boton.style.pointerEvents = "none";
     boton.style.opacity = "0.5"; 
 
+    // Agregar eventos de clic a los elementos
     elementos.forEach((elemento) => {
         elemento.addEventListener("click", function () {
             if (!this.classList.contains("clicado")) {
@@ -29,4 +34,5 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
-});
+}
+
