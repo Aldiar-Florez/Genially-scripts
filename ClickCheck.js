@@ -3,7 +3,10 @@ let checkGeniallyLoaded = setInterval(() => {
         document.querySelector("[name='elemento1']"),
         document.querySelector("[name='elemento2']"),
         document.querySelector("[name='elemento3']")
+        
     ];
+    
+    console.log("elementos asignados");
     let boton = document.querySelector("[name='botonAvanzar']");
     
     if (elementos.every(el => el) && boton) { // Si todos los elementos existen
