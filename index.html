@@ -3,66 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interacción en Genially</title>
-    <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        .elemento { 
-            display: inline-block; 
-            width: 120px; 
-            height: 120px; 
-            line-height: 120px;
-            text-align: center;
-            background: lightgray; 
-            color: white; 
-            font-weight: bold; 
-            margin: 10px; 
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        #botonAvanzar { 
-            display: block; 
-            margin: 20px auto; 
-            padding: 15px 30px; 
-            background: gray; 
-            color: white; 
-            border: none; 
-            cursor: not-allowed; 
-            opacity: 0.5; 
-            font-size: 16px;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Detectar Elementos en Genially</title>
 </head>
 <body>
-
-    <h2>Haz clic en al menos 2 elementos para activar el botón</h2>
-    <div id="elemento1" class="elemento" style="background:red;">CONTENT 1</div>
-    <div id="elemento2" class="elemento" style="background:teal;">CONTENT 2</div>
-    <div id="elemento3" class="elemento" style="background:navy;">CONTENT 3</div>
-    <button id="botonAvanzar" disabled>Next</button>
-
+    <h1>Detectando elementos en Genially...</h1>
     <script>
-        let elementos = document.querySelectorAll(".elemento");
-        let boton = document.getElementById("botonAvanzar");
-        let contador = 0;
-
-        elementos.forEach((elemento) => {
-            elemento.addEventListener("click", function () {
-                if (!this.classList.contains("clicado")) {
-                    this.classList.add("clicado");
-                    this.style.opacity = "0.7"; // Cambio visual al hacer clic
-                    contador++;
-                }
-
-                if (contador >= 2) {
-                    boton.disabled = false;
-                    boton.style.cursor = "pointer";
-                    boton.style.opacity = "1";
-                    boton.style.background = "blue";
-                }
-            });
-        });
+        function detectarElementosGenially() {
+            const elementos = document.querySelectorAll("[data-noduss-item-name]");
+            
+            if (elementos.length === 0) {
+                console.log("❌ No se encontraron elementos en Genially.");
+            } else {
+                console.log("✅ Elementos detectados en Genially:");
+                elementos.forEach(el => {
+                    console.log(`📌 Nombre: ${el.getAttribute("data-noduss-item-name")}`, el);
+                });
+            }
+        }
+        
+        // Esperar 2 segundos para que Genially cargue los elementos antes de buscarlos
+        setTimeout(detectarElementosGenially, 2000);
     </script>
-
 </body>
 </html>
